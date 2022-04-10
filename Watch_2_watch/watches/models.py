@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from Watch_2_watch.accounts.models import UserProfile
 
@@ -25,7 +26,7 @@ class Watch(models.Model):
     )
 
     brand = models.CharField(max_length=40)
-    production_year = models.PositiveIntegerField()
+    production_year = models.PositiveIntegerField(default=2021, validators=[MinValueValidator(1900), MaxValueValidator(2022)])
     description = models.TextField()
     image = models.ImageField(
         upload_to='watches',

@@ -26,7 +26,7 @@ def user_profile(request, pk=None):
 
         return redirect('current user profile')
 
-# signup user
+
 def signup_user(request):
     if request.method == 'GET':
         context = {

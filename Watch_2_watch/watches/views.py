@@ -107,12 +107,10 @@ def edit_watch(request, pk):
 
 
 def create_watch(request, pk=None):
-    user = request.user if pk is None else User.objects.get(pk=pk)
     if request.method == 'GET':
         form = CreateWatchForm()
 
         context = {
-            'user': user,
             'form': form,
         }
 
@@ -121,7 +119,6 @@ def create_watch(request, pk=None):
         form = CreateWatchForm(
             request.POST,
             request.FILES,
-            instance=user.userprofile,
         )
         if form.is_valid():
             watch = form.save()
