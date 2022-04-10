@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h1 class='text-center'>All watch photos</h1>
+        <div class="row">
+                {% for watch in watches %}
+                <div class="col-lg-4">
+                    <div class="card" style="width: 18rem; height: 700px;">
+                      <img src="{{ watch.image.url }}" class="card-img-top" alt="" style="width: 100%; max-height: 300px;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ watch.brand }}, Model year: {{ watch.production_year }}</h5>
+                            <h5 class="card-title">Type: {{ watch.type }}</h5>
+                            {% if watch.for_sale_status == False %}
+                                <h5 class="card-title"> For sale: No</h5>
+                            {% else %}
+                                <h5 class="card-title">For sale: Yes</h5>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                                <p class="card-text">{{ watch.description}}</p>
+                                <a href="{% url 'watch details' watch.id %}" class="btn btn-primary">See details</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+{% endblock %}

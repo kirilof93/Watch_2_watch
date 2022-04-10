@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="text-center">
+        <h1>Hello, {{ profile_user.username }}!</h1>
+        <h5>This is your profile</h5>
+        {% if profile_user.userprofile.profile_picture %}
+            <img class="rounded-circle mb-3" src="{{ profile_user.userprofile.profile_picture.url }}" alt="Generic placeholder image" width="140" height="140">
+        {% else %}
+            <img class="rounded-circle mb-3" src="https://afribary.com/authors/anonymous-user/photo" alt="Generic placeholder image" width="140" height="140">
+        {% endif %}
+        <div class="w-50 m-auto">
+            <form action="{% url 'current user profile' %}" method="post" enctype="multipart/form-data">
+                {{ form }}
+                {% csrf_token %}
+                <button class="btn btn-primary">Upload</button>
+            </form>
+            <h5>Add another watch: </h5>
+            <a href="{% url 'create watch' %}" class="btn btn-primary">Add another watch</a>
+        </div>
+    </div>
+        <hr>
+        {% if watches %}
+            <h2 class='text-center'>These are your current watches</h2>
+            {% for watch in watches %}
+                <div class="profile-watches">
+                <div class="card" style="width: 18rem; height: 700px;">
+                      <img src="{{ watch.image.url }}" class="card-img-top" alt="" style="width: 100%; max-height: 300px;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ watch.brand }}, Model year: {{ watch.production_year }}</h5>
+                            <h5 class="card-title">Type: {{ watch.type }}</h5>
+                            {% if watch.for_sale_status == False %}
+                                <h5 class="card-title"> For sale: No</h5>
+                            {% else %}
+                                <h5 class="card-title">For sale: Yes</h5>
+                            {% endif %}
+                            <p class="card-text">{{ watch.description}}</p>
+                            <a href="{% url 'watch details' watch.id %}" class="btn btn-primary">See details</a>
+                        </div>
+                    </div>
+                </div >
+            {% endfor %}
+        {% else %}
+            <div class="text-center">
+            <h2>You have no watches in your collection</h2>
+            <a href="{% url 'create watch' %}" class="btn btn-success">Add Watch Photo</a>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
