@@ -1,6 +1,6 @@
-from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from Watch_2_watch.accounts.models import UserProfile
+from Watch_2_watch.testing.validator import prod_year_validator
 
 
 class Watch(models.Model):
@@ -10,6 +10,7 @@ class Watch(models.Model):
     TYPE_CHOICE_PILOT = 'pilot'
     TYPE_CHOICE_MECHANICAL = 'mechanical'
     TYPE_CHOICE_QUARTZ = 'quartz'
+    TYPE_CHOICE_OTHER = 'other'
 
     TYPE_CHOICES = (
         (TYPE_CHOICE_DIVER, 'Diver'),
@@ -18,15 +19,18 @@ class Watch(models.Model):
         (TYPE_CHOICE_PILOT, 'Pilot'),
         (TYPE_CHOICE_MECHANICAL, 'Mechanical'),
         (TYPE_CHOICE_QUARTZ, 'Quartz'),
+        (TYPE_CHOICE_OTHER, 'Other'),
     )
 
     type = models.CharField(
-        max_length=15,
+        max_length=30,
         choices=TYPE_CHOICES,
+
     )
 
     brand = models.CharField(max_length=40)
-    production_year = models.PositiveIntegerField(default=2021, validators=[MinValueValidator(1900), MaxValueValidator(2022)])
+    production_year = models.PositiveIntegerField(default=2022, validators=[prod_year_validator])
+
     description = models.TextField()
     image = models.ImageField(
         upload_to='watches',

@@ -106,16 +106,25 @@ def edit_watch(request, pk):
         return render(request, 'watches/watches_edit.html', context)
 
 
-def create_watch(request, pk=None):
-    if request.method == 'GET':
-        form = CreateWatchForm()
+def create_watch(request, pk=None, user=None):
+    # def get_user_name(request):
+    #     username = None
+    #     if request.user.is_authenticated():
+    #         username = request.user.username
+    #         return username
+    #
 
+    if request.method == 'GET':
+        watch_owner = request.user.username
+        form = CreateWatchForm(initial = {'user': watch_owner})
         context = {
             'form': form,
+            'watch_owner': watch_owner,
         }
 
         return render(request, 'watches/watches_create.html', context)
     else:
+        watch_owner = request.user.username
         form = CreateWatchForm(
             request.POST,
             request.FILES,
@@ -127,6 +136,7 @@ def create_watch(request, pk=None):
 
         context = {
             'form': form,
+            'watch_owner': watch_owner,
         }
 
         return render(request, 'watches/watches_create.html', context)

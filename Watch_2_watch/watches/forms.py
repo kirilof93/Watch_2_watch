@@ -36,7 +36,7 @@ class EditWatchForm(BootstrapFormMixin, forms.ModelForm):
 class CreateWatchForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['user'].widget.attrs['readonly'] = 'readonly'
+        # self.fields['user'].widget.attrs['disabled'] = 'disabled'
 
         for (_, field) in self.fields.items():
             field.widget.attrs['class'] = 'form-control'

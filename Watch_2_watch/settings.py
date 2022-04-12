@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'Watch_2_watch.common',
     'Watch_2_watch.watches',
     'Watch_2_watch.accounts',
+    'Watch_2_watch.testing',
 
     'django.contrib.admin',
     'django.contrib.auth',
