@@ -37,7 +37,7 @@ class Watch(models.Model):
     )
     for_sale_status = models.BooleanField(default=False)
 
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,)
 
     def __str__(self):
         return f'{self.id}; {self.brand}; {self.type}'

@@ -106,14 +106,8 @@ def edit_watch(request, pk):
         return render(request, 'watches/watches_edit.html', context)
 
 
-def create_watch(request, pk=None, user=None):
-    # def get_user_name(request):
-    #     username = None
-    #     if request.user.is_authenticated():
-    #         username = request.user.username
-    #         return username
-    #
-
+@login_required
+def create_watch(request):
     if request.method == 'GET':
         watch_owner = request.user.username
         form = CreateWatchForm(initial = {'user': watch_owner})

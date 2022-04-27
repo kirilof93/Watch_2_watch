@@ -9,12 +9,14 @@
             </div>
             <div class="d-inline p-2 w-50">
                 <div class="d-flex justify-content-between">
-                    <h5><u>Type:</u> {{ watch.type }}</h5>
-                    <h5><u>Name:</u> {{ watch.brand }}</h5>
-                    <h5><u>Model year:</u> {{ watch.production_year }}</h5>
+                    <ul>
+                        <h5><b>Type:</b> {{ watch.type }}</h5>
+                        <h5><b>Name:</b> {{ watch.brand }}</h5>
+                        <h5><b>Model year:</b> {{ watch.production_year }}</h5>
+                    </ul>
                 </div>
-                    <h5><u>Owner:</u> {{ watch.user }}</h5>
-                <p class="mt-2">{{ watch.description }}</p>
+                    <h5><b>Owner:</b> <u>{{ watch.user }}</u></h5>
+                <p class="mt-2"> <h5><b>About: </b>{{ watch.description }}</h5>
                 <div>
                     {% if can_edit_delete %}
                         <a href="{% url 'edit watch' watch.pk %}" class="btn btn-success">Edit</a>
